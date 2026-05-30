@@ -11,7 +11,8 @@ namespace Defaults.Misc.PlantType
     {
         public static void Prefix(Zone_Growing __instance, ref ThingDef ___plantDefToGrow)
         {
-            if (___plantDefToGrow == null)
+            // Check type to avoid patching non-vanilla grow zones
+            if (__instance.GetType() == typeof(Zone_Growing) && ___plantDefToGrow == null)
             {
                 ___plantDefToGrow = PollutionUtility.SettableEntirelyPolluted(__instance)
                     ? ThingDefOf.Plant_Toxipotato
